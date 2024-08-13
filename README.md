@@ -50,7 +50,7 @@ To set up a development environment:
 
 ```sh
 git clone https://github.com/stenzr/grep_excel
-cd spawn_parallel_instances
+cd grep_excel
 ```
 
 #### Create a virtual environment and activate it:
