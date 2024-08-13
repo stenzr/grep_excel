@@ -1,0 +1,12 @@
+build/
+dist/
+venv/
+grep_excel.egg-info/
+grep_excel/__pycache__/__init__.cpython-312.pyc
+grep_excel/__pycache__
+grep_excel.egg-info/
+grep_excel_venv/
+grep_excel.egg-info/
+grep_excel/__pycache__/__init__.cpython-312.pyc
+grep_excel/__pycache__
+tests/__pycache__
