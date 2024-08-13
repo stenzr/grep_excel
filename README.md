@@ -18,12 +18,12 @@ ExcelGrep is an utility for searching through Excel files in a directory (includ
 You can install the package using pip:
 
 ```sh
-pip install grep_excel
+pip install grep-excel
 ```
 
 ## Usage
 
-To use the grep_excel, run the following command:
+To use the grep-excel, run the following command:
 
 ```sh
 grep-excel ./your_directory "pattern_to_search" --exclude "pattern_to_exclude" --print-row
