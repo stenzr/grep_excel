@@ -14,35 +14,38 @@ class ExcelGrep:
 
     def search_excel_file(self, file_path):
         try:
-            df = pd.read_excel(file_path)
+            sheets = pd.read_excel(file_path, sheet_name=None)
         except Exception as e:
             print(f"Error reading {file_path}: {e}")
             return
 
-        total_cells = df.size
+        total_cells = sum(df.size for df in sheets.values())
         cells_processed = 0
 
-        for index, row in df.iterrows():
-            for col in df.columns:
-                value = str(row[col])
-                cells_processed += 1
-                if self.pattern in value:
-                    if self.exclude_pattern and self.exclude_pattern in value:
-                        continue
-                    match_info = {
-                        'file': file_path,
-                        'row': index,
-                        'column': col,
-                        'value': value,
-                        'row_data': row.to_dict() if self.print_row else None
-                    }
-                    self.print_match(match_info)
+        for sheet_name, df in sheets.items():
+            for index, row in df.iterrows():
+                for col in df.columns:
+                    value = str(row[col])
+                    cells_processed += 1
+                    if self.pattern in value:
+                        if self.exclude_pattern and self.exclude_pattern in value:
+                            continue
+                        match_info = {
+                            'file': file_path,
+                            'sheet': sheet_name,
+                            'row': index,
+                            'column': col,
+                            'value': value,
+                            'row_data': row.to_dict() if self.print_row else None
+                        }
+                        self.print_match(match_info)
 
-            # Print progress per file
-            print(f"Scanning file {file_path}: {cells_processed}/{total_cells} cells processed ({(cells_processed / total_cells) * 100:.2f}%)")
+                # Print progress per file
+                if total_cells:
+                    print(f"Scanning file {file_path}: {cells_processed}/{total_cells} cells processed ({(cells_processed / total_cells) * 100:.2f}%)")
 
     def print_match(self, match_info):
-        file_info = f"File: {match_info['file']}, Row: {match_info['row']}, Column: {match_info['column']}"
+        file_info = f"File: {match_info['file']}, Sheet: {match_info['sheet']}, Row: {match_info['row']}, Column: {match_info['column']}"
         print(file_info)
         if match_info['row_data']:
             print(f"Row Data: {match_info['row_data']}")

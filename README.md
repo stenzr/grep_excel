@@ -26,7 +26,7 @@ pip install grep-excel
 To use the grep-excel, run the following command:
 
 ```sh
-grep-excel ./your_directory "pattern_to_search" --exclude "pattern_to_exclude" --print-row
+grep_excel "pattern_to_search" ./your_directory --exclude "pattern_to_exclude" --print-row
 
 ```
 
